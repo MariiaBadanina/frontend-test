@@ -1,0 +1,41 @@
+.navigationContainer {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-bottom: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .navigationContainer {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
+.navigationItem {
+  display: block;
+  border-radius: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+.navigationItemCurrent {
+  background-color: #111827;
+  color: #ffffff;
+}
+
+.navigationItemDefault {
+  color: #d1d5db;
+}
+
+.navigationItemDefault:hover {
+  background-color: #374151;
+  color: #ffffff;
+}

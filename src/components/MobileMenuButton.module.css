@@ -1,0 +1,25 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  background-color: #1f2937;
+  padding: 0.5rem;
+  color: #9ca3af;
+}
+
+.button:hover {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #1f2937;
+}
+
+.icon {
+  display: block;
+  height: 1.5rem;
+  width: 1.5rem;
+}

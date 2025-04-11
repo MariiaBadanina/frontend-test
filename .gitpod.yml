@@ -1,0 +1,12 @@
+tasks:
+  - name: page-prism-app-setup
+    init: npm install
+  - name: llm-setup-ollama
+    before: |
+        docker pull ollama/ollama
+        docker run -d -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+    init: docker exec -it ollama ollama run tinyllama
+
+ports:
+  - port: 5173
+    onOpen: open-preview

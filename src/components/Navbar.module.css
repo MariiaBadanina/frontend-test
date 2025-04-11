@@ -1,0 +1,44 @@
+.nav {
+  background-color: #1f2937;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.innerContainer {
+  display: flex;
+  height: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobileMenuContainer {
+  margin-right: -0.5rem;
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .mobileMenuContainer {
+    display: none;
+  }
+}
+

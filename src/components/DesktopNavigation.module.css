@@ -1,0 +1,40 @@
+.container {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: block;
+  }
+}
+
+.navList {
+  margin-left: 2.5rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.navList > * + * {
+  margin-left: 1rem;
+}
+
+.navItem {
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.navItemDefault {
+  color: #d1d5db;
+}
+
+.navItemDefault:hover {
+  background-color: #374151;
+  color: #ffffff;
+}
+
+.navItemCurrent {
+  background-color: #111827;
+  color: #ffffff;
+}
