@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getProject } from '../services/project'
 
 const getTitle = (pathname) => {
@@ -16,9 +16,10 @@ const getTitle = (pathname) => {
 const usePageTitle = (title) => {
   const [pageTitle, setPageTitle] = useState(title)
   const location = useLocation()
-  const path = location.pathname
-  const pathArray = path.split('/')
-  const id = pathArray[pathArray.length - 1]
+  const { id } = useParams()
+  // const path = location.pathname
+  // const pathArray = path.split('/')
+  // const id = pathArray[pathArray.length - 1]
 
   useEffect(() => {
     const fetchProject = async () => {
