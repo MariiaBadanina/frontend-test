@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { getProject } from '../services/project'
 import Button from '../components/Button'
 import styles from './ProjectDetail.module.css'
+import { TinyLlamaDemo } from '../components/TinyLlamaDemo'
 
 const ProjectDetail = () => {
   const [project, setProject] = useState(null)
@@ -22,6 +23,7 @@ const ProjectDetail = () => {
 
   return (
     <div className={styles.container}>
+      <TinyLlamaDemo />
       <h1 className={styles.heading}>{project.name}</h1>
       <p className={styles.description}>{project.description}</p>
       <div className={styles.section}>
