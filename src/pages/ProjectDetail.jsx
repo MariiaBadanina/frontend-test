@@ -4,6 +4,7 @@ import { getProject } from '../services/project'
 import Button from '../components/Button'
 import styles from './ProjectDetail.module.css'
 import { TinyLlamaDemo } from '../components/TinyLlamaDemo'
+// import { UnsplashDemo } from '../components/UnsplashDemo'
 
 const ProjectDetail = () => {
   const [project, setProject] = useState(null)
@@ -23,7 +24,8 @@ const ProjectDetail = () => {
 
   return (
     <div className={styles.container}>
-      <TinyLlamaDemo />
+      {/* <TinyLlamaDemo /> */}
+      {/* <UnsplashDemo /> */}
       <h1 className={styles.heading}>{project.name}</h1>
       <p className={styles.description}>{project.description}</p>
       <div className={styles.section}>
