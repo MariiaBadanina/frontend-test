@@ -22,6 +22,14 @@ const ProjectDetail = () => {
 
   return (
     <div className={styles.container}>
+      {project.image && (
+        <img
+          src={project.image}
+          alt={project.name}
+          style={{ width: '150px', borderRadius: '8px' }}
+          className="w-full mt-2 rounded shadow"
+        />
+      )}
       <h1 className={styles.heading}>{project.name}</h1>
       <p className={styles.description}>{project.description}</p>
       <div className={styles.section}>

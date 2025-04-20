@@ -8,6 +8,7 @@ interface Project {
   createdAt: string
   updatedAt: string
   inspirations: Inspiration[]
+  image?: string
 }
 
 /**
