@@ -2,41 +2,58 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { getAllProjects, createProject } from '../services/project'
 import Button from '../components/Button'
-import { UnsplashDemo } from '../components/UnsplashDemo'
+import { fetchTinyLlama } from '../utils/fetchTinyLlama'
+import { fetchUnsplashImage } from '../utils/fetchUnsplashImage'
 
 const Projects = () => {
   const [projects, setProjects] = useState([])
-  const [projectName, setProjectName] = useState('')
-  const [projectDescription, setProjectDescription] = useState('')
+  const [projectName, setProjectName] = useState('New Project')
   const [titleErrorMessage, setTitleErrorMessage] = useState(false)
-  const [descriptionErrorMessage, setDescriptionErrorMessage] = useState(false)
+  const [projectDescription, setProjectDescription] = useState('')
+  const [image, setImage] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchProjects = async () => {
       const allProjects = await getAllProjects()
-      setProjects(allProjects)
+      setProjects(
+        allProjects.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        )
+      )
     }
     fetchProjects()
   }, [])
 
   const handleCreateProject = async () => {
-    if (!projectName || !projectDescription) {
+    setLoading(true)
+    const response = await fetchTinyLlama(
+      `Convert "${projectName}" into a short description.`
+    )
+    setProjectDescription(response)
+
+    const imageUrl = await fetchUnsplashImage(response)
+    setImage(imageUrl)
+
+    setLoading(false)
+    if (!projectName) {
       setTitleErrorMessage(!projectName.trim())
-      setDescriptionErrorMessage(!projectDescription.trim())
       return
     }
     const newProject = await createProject({
       name: projectName,
-      description: projectDescription,
+      description: response,
+      image: imageUrl,
     })
     setProjects([...projects, newProject])
     setProjectName('')
-    setProjectDescription('')
+    setProjectDescription(response)
+    setImage(imageUrl)
+    setLoading(false)
   }
-
   return (
     <div>
-      <div className="flex mb-10">
+      <div className="mb-10">
         <div className="relative">
           <input
             type="text"
@@ -52,31 +69,25 @@ const Projects = () => {
             </p>
           )}
         </div>
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Project Description"
-            value={projectDescription}
-            onChange={(e) => setProjectDescription(e.target.value)}
-            onBlur={() =>
-              setDescriptionErrorMessage(!projectDescription.trim())
-            }
-            className="mb-4 p-2 border border-gray-300 rounded text-white"
-          />
-          {descriptionErrorMessage && (
-            <p className="text-red-400 absolute  top-[40px]">
-              Description is required
-            </p>
-          )}
-        </div>
       </div>
-      <Button onClick={handleCreateProject}>Create New Project</Button>
+
+      <Button onClick={handleCreateProject}>
+        {loading ? 'Loading...' : 'Create New Project'}
+      </Button>
       {projects.map((project) => (
         <div key={project.id} className="p-4 border-b border-gray-200">
           <Link to={`/projects/${project.id}`} className="block">
             <h2 className="text-lg font-semibold">{project.name}</h2>
             <small>{project.id}</small>
             <p className="text-sm text-gray-600">{project.description}</p>
+            {project.image && (
+              <img
+                src={project.image}
+                alt={project.name}
+                style={{ width: '100px', borderRadius: '8px' }}
+                className="w-full mt-2 rounded shadow"
+              />
+            )}
           </Link>
         </div>
       ))}
